@@ -146,3 +146,44 @@ CORS_ORIGIN_ALLOW_ALL = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['general'],
+    },
+    'formatters': {
+        'default': {
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        }
+    },
+    'handlers': {
+        'general': {
+            'level': 'INFO',
+            'class': 'logging.handlers.WatchedFileHandler',
+            'formatter': 'default',
+            'filename': 'backend.log'
+        },
+        'user': {
+            'level': 'INFO',
+            'class': 'logging.handlers.WatchedFileHandler',
+            'formatter': 'default',
+            'filename': 'backend.log'
+        }
+    },
+    'loggers': {
+        'general': {
+            'level': 'INFO',
+            'handlers': ['general'],
+            'propagate': False,
+        },
+        'user': {
+            'level': 'INFO',
+            'handlers': ['user'],
+            'propagate': False,
+        }
+    }
+}
