@@ -57,3 +57,4 @@ staticfiles/
 media/
 .env
 .vscode/
+*.pmc
