@@ -27,7 +27,7 @@ class TimerViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super(TimerViewSet, self).get_queryset()
         queryset = queryset.filter(user=self.request.user)
-        if request.query_params.get('start'):
+        if self.request.query_params.get('start'):
             queryset = queryset.filter(start_date=request.query_params.get('start'))
         return queryset
 
