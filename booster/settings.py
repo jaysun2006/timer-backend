@@ -187,3 +187,5 @@ LOGGING = {
         }
     }
 }
+
+ACCOUNT_EMAIL_VERIFICATION='none'
