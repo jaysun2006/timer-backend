@@ -32,15 +32,14 @@ class TimerViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super(TimerViewSet, self).get_queryset()
-        queryset = queryset.filter(user=self.request.user,)
+        queryset = queryset.filter(user=self.request.user)
         if self.request.query_params.get('start') and self.request.query_params.get('end'):
-            print(self.request.query_params.get('start'), self.request.query_params.get('end'))
             start_date = get_day_start(parse_date(self.request.query_params.get('start')))
             end_date = get_day_end(parse_date(self.request.query_params.get('end')))
         else:
             start_date = get_today_start()
             end_date = get_today_end()
-            queryset = queryset.filter(start_datetime__range=[start_date, end_date])
+        queryset = queryset.filter(start_datetime__gte=start_date, start_datetime__lte=end_date)
         return queryset
 
     def perform_create(self, serializer):
