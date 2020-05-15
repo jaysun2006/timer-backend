@@ -48,7 +48,7 @@ class TimerViewSet(viewsets.ModelViewSet):
         else:
             start_date = get_today_start()
             end_date = get_today_end()
-        timers = self.queryset.filter(start_datetime__gte=start_date, start_datetime__lte=end_date)
+        timers = self.queryset.filter(user=self.request.user, start_datetime__gte=start_date, start_datetime__lte=end_date)
         return Response(TimerSerializer(timers, many=True).data)
 
 
